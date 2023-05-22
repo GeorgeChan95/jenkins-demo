@@ -21,6 +21,7 @@ pipeline {
         stage('编译构建') {
             steps {
                 echo '开始执行代码编译'
+                sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
         stage('项目部署') {
