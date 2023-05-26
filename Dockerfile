@@ -5,7 +5,7 @@ MAINTAINER george Docker springboot "george_95@126.com"
 
 # 修改源
 RUN echo "http://mirrors.aliyun.com/alpine/latest-stable/main/" > /etc/apk/repositories && \
-    echo "http://mirrors.aliyun.com/alpine/latest-stable/community/" >> /etc/apk/repositories \
+    echo "http://mirrors.aliyun.com/alpine/latest-stable/community/" >> /etc/apk/repositories
 
 # 安装需要的软件，解决时区问题
 RUN apk --update add curl bash tzdata && \
