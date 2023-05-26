@@ -27,7 +27,8 @@ pipeline {
         stage('项目部署') {
             steps {
                 echo '开始执行项目部署'
-                sh 'cd target/ && java -jar jenkinsdemo.jar'
+//                 sh 'cd target/ && java -jar jenkinsdemo.jar'
+                sh 'mvn dockerfile:build'
             }
         }
     }
