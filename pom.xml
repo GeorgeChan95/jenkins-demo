@@ -50,10 +50,13 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>${project.build.finalName}</repository>
+                    <repository>192.168.204.142:5000/my-harbor/${project.build.finalName}</repository>
+                    <username>admin</username>
+                    <password>Harbor12345</password>
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                        <!-- 使用dockerfile构建镜像时不走缓存 -->
                         <noCache>true</noCache>
                     </buildArgs>
                 </configuration>

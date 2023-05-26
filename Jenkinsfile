@@ -52,13 +52,13 @@ pipeline {
         stage('镜像构建') {
             steps {
                 echo '开始执行代码打包、镜像构建'
-                sh 'mvn dockerfile:build'
+                sh 'mvn dockerfile:build dockerfile:push'
             }
         }
         stage('运行容器') {
             steps {
                 echo '开始执行运行容器'
-                sh 'docker run -itd --name=jenkinsdemo -p 8080:8080 jenkinsdemo:1.0'
+                sh 'docker run -itd --name=jenkinsdemo -p 8080:8080 192.168.204.142:5000/my-harbor/jenkinsdemo:1.0'
             }
         }
     }
