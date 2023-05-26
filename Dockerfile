@@ -14,6 +14,8 @@ rm -rf /var/cache/apk/*
 #修改镜像为东八区时间
 ENV TZ Asia/Shanghai
 ARG JAR_FILE
+
+RUN echo "打印jar包名称" && echo ${JAR_FILE} && echo "打印当前路径" && echo $(pwd)
 COPY ${JAR_FILE} app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app.jar"]
