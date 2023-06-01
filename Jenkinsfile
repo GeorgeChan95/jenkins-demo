@@ -1,6 +1,6 @@
 pipeline {
     agent {
-      label 'agent'
+      label 'agent-202'
     }
 
     stages {
@@ -10,13 +10,14 @@ pipeline {
                 sh '''java -version
                 mvn -v
                 docker -v
+                docker -v
                 git version'''
             }
         }
         stage('拉取代码') {
             steps {
                 echo '开始拉取代码'
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '3607c53e-5d55-47a9-9193-be178d16244e', url: 'ssh://git@192.168.204.141:222/my-group/jenkins-demo.git']])
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'd63fb5a2-7e04-4dd3-8165-f05c1f89004c', url: 'ssh://git@192.168.6.201:222/test/jenkins-demo.git']])
             }
         }
         stage('编译构建') {
@@ -42,7 +43,7 @@ pipeline {
             steps {
                 echo '开始执行删除已存在的镜像'
                 sh '''echo \'检查镜像是否存在\'
-                imageid=`docker images | grep jenkins | awk \'{print $3}\'`
+                imageid=`docker images | grep jenkinsdemo | awk \'{print $3}\'`
                 if [ "$imageid" != "" ]; then
                         echo \'删除镜像\'
                         docker rmi -f $imageid
@@ -58,7 +59,7 @@ pipeline {
         stage('运行容器') {
             steps {
                 echo '开始执行运行容器'
-                sh 'docker run -itd --name=jenkinsdemo -p 8080:8080 192.168.204.142:5000/my-harbor/jenkinsdemo:1.0'
+                sh 'docker run -itd --name=jenkinsdemo -p 8080:8080 192.168.6.201:5000/ioms/jenkinsdemo:1.0'
             }
         }
     }
