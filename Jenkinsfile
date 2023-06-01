@@ -50,6 +50,12 @@ pipeline {
                 fi'''
             }
         }
+        stage('登录Harbor') {
+            steps {
+                echo '开始执行登录Harbor'
+                sh 'docker login -u admin -p Harbor12345 192.168.6.201:5000'
+            }
+        }
         stage('镜像构建') {
             steps {
                 echo '开始执行代码打包、镜像构建'
